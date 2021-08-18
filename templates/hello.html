@@ -1,5 +1,8 @@
 <body>
   <p>Hello {{ name }}, </p>
   <p>Please input your elapsed time</p>
-  <input type="text">
+  <form name="elapsed_time" method="post" action="/submit">
+    <input type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
+    <input type="submit" value="Submit">
+  </form>
 </body>
