@@ -55,16 +55,17 @@ def main(param=None):
     if args.do_predict:
         finish_time_predictor.load_weights(args)
         if args.elapsed_time_what_if is not None:
-            finish_time_predictor.predict(
+            predicted_time = finish_time_predictor.predict(
                 args.elapsed_time.split(","),
                 args,
                 args.elapsed_time_what_if.split(","),
             )
         else:
-            finish_time_predictor.predict(
+            predicted_time = finish_time_predictor.predict(
                 args.elapsed_time.split(","),
                 args,
             )
+        return predicted_time
 
 
 if __name__ == '__main__':

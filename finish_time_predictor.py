@@ -88,89 +88,12 @@ class FinishTimePredictor():
         self.encoder.load_weights(args.encoder_model_path)
         self.decoder.load_weights(args.decoder_model_path)
 
-    def train(self, dataset, eval_dataset, args):
-        optimizer = tf.optimizers.Adam(learning_rate=0.0001)
-
-        def negloglik(y, rv_y):
-            return -rv_y.log_prob(tf.cast(y, tf.float32))
-        patience = 0
-        for i in tqdm(range(200)):
-            for data in tqdm(dataset):
-                enc_dec_splitid = np.random.randint(1, 10 - 1)
-                dataforenc = data[:, :enc_dec_splitid]
-                datafordec = data[:, enc_dec_splitid:]
-                kmforenc = MILESTONE_FLOAT[:enc_dec_splitid]
-                kmfordec = MILESTONE_FLOAT[enc_dec_splitid:]
-                with tf.GradientTape() as tape:
-                    splits_recorded, state = self.encoder(dataforenc,
-                                                          kmforenc, args,
-                                                          training=True)
-                    predicts = self.decoder(state, splits_recorded,
-                                            enc_dec_splitid, kmfordec,
-                                            dataforenc,
-                                            training=True)
-                    loss = negloglik(datafordec, predicts)
-                grads = tape.gradient(
-                    loss,
-                    self.encoder.trainable_weights +
-                    self.decoder.trainable_weights)
-                optimizer.apply_gradients(
-                    zip(
-                        grads,
-                        self.encoder.trainable_weights +
-                        self.decoder.trainable_weights))
-            test_losses = []
-            for enc_dec_splitid in range(1, 10):
-                for test_data in eval_dataset:
-                    dataforenc = test_data[:, :enc_dec_splitid]
-                    datafordec = test_data[:, enc_dec_splitid:]
-                    kmforenc = MILESTONE_FLOAT[:enc_dec_splitid]
-                    kmfordec = MILESTONE_FLOAT[enc_dec_splitid:]
-                    splits_recorded, state = self.encoder(dataforenc,
-                                                          kmforenc, args,
-                                                          training=False)
-                    predicts = self.decoder(
-                        state, splits_recorded, enc_dec_splitid, kmfordec,
-                        dataforenc, training=False)
-                    loss = negloglik(datafordec, predicts)
-                    test_losses.append(loss)
-            print("\n", np.mean(test_losses))
-            if i == 0:
-                best = np.mean(test_losses)
-                self.encoder.save_weights(args.encoder_model_path)
-                self.decoder.save_weights(args.decoder_model_path)
-            else:
-                if np.mean(test_losses) > best:
-                    if patience == 5:
-                        print("Early stopping.")
-                        return
-                    else:
-                        patience += 1
-                else:
-                    best = min(best, np.mean(test_losses))
-                    self.encoder.save_weights(args.encoder_model_path)
-                    self.decoder.save_weights(args.decoder_model_path)
-                    patience = 0
-
-    def validate(self, dataset, args):
-        for data in dataset:
-            assert data.shape[0] == 1
-            enc_dec_splitid = np.random.randint(1, 9)
-            self.get_sample(data, enc_dec_splitid, args)
-            one_dim_encoder_data = data[0, :enc_dec_splitid]
-            one_dim_decoder_data = data[0, enc_dec_splitid:]
-            self.print_estimation(one_dim_encoder_data, one_dim_decoder_data)
-            graph = Graph(self)
-            graph.add_actual_data(one_dim_encoder_data, one_dim_decoder_data)
-            graph.add_estimated_data()
-            graph.show()
-
     def predict(self, one_dim_baseline, args, one_dim_whatif=None):
         enc_dec_splitid = len(one_dim_baseline)
         two_dim_list = process_one_dim_to_two_dim_sec(one_dim_baseline)
         self.get_sample(two_dim_list, enc_dec_splitid, args)
         one_dim_encoder_data = one_dim_baseline[:enc_dec_splitid]
-        self.print_estimation(one_dim_encoder_data)
+        estimation_strings = self.print_estimation(one_dim_encoder_data)
         graph = Graph(self)
         # graph.add_actual_data(one_dim_encoder_data)
         graph.add_estimated_data()
@@ -184,6 +107,7 @@ class FinishTimePredictor():
             # graph.add_actual_data(one_dim_encoder_data)
             graph.add_estimated_data(color="green")
         graph.save(args)
+        return estimation_strings
 
     def get_sample(self, two_dim_list, enc_dec_splitid, args):
         dataforenc = two_dim_list[:, :enc_dec_splitid]
@@ -205,6 +129,7 @@ class FinishTimePredictor():
     def print_estimation(self, one_dim_encoder_data,
                          one_dim_decoder_data=None, batch_idx=0):
         print("**Estimation**")
+        estimation_strings = []
         for i in range(len(MILESTONE)):
             kmidx = MILESTONE[i]
             if i < len(one_dim_encoder_data):
@@ -239,6 +164,9 @@ class FinishTimePredictor():
                 kmidx.ljust(10),
                 actual_data, estimated_data
             )
+            estimation_strings.append(
+                f"{kmidx.ljust(10)} {actual_data} {estimated_data}")
+        return estimation_strings
 
 
 class Graph():

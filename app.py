@@ -16,7 +16,9 @@ def hello_world(name="Tomo"):
 
 @app.route('/submit', methods=['POST'])
 def process():
-    request = Request
-    main(["--do_predict", "--elapsed_time", data])
+    predicted_time = main(
+        ["--do_predict", "--elapsed_time", request.form['record']])
+    return render_template("hello.html", result=predicted_time)
+
 
 
