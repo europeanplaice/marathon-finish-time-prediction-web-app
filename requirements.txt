@@ -1,9 +1,9 @@
+numpy
+pandas
 flask
 gunicorn
 matplotlib
 tensorflow
 tensorflow_probability
 tqdm
-numpy
 seaborn
-pandas
