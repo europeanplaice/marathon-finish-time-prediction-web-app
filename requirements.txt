@@ -3,7 +3,7 @@ pandas
 flask
 gunicorn
 matplotlib
-tensorflow
+tensorflow-cpu
 tensorflow_probability
 tqdm
 seaborn
