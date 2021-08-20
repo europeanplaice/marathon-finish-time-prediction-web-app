@@ -3,7 +3,7 @@ pandas
 flask
 gunicorn
 matplotlib
-tensorflow-cpu=2.6.0
+tensorflow-cpu==2.6.0
 tensorflow_probability
 tqdm
 seaborn
