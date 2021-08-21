@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <style>
@@ -8,18 +8,28 @@
       margin-top: 0.5em;
     }
 
+    .container {
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+
+    .column {
+      max-width: 100%;
+    }
+
     .results {
       display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 3em;
+      flex-wrap: wrap; 
+      margin-bottom: 2em;
     }
 
     .result {
       border: 1px solid black;
       margin-right: 1em;
       margin-top: 1em;
-      min-width: 200px;
       padding: 0.5em;
+      /* min-width: 50%; */
     }
 
     .input {
@@ -42,16 +52,24 @@
 
 <body>
   <div class="container">
-    <p>Hello!</p>
-    <p>Please input your elapsed time.</p>
-    <form name="elapsed_time" method="post" action="/submit">
-      <div class="field">
-        <input class="input" type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
+    <div class="columns">
+      <div class="column">
+        <p>Hello!</p>
+        <p>Please input your elapsed time.</p>
       </div>
-      <div class="control">
-        <input class="button is-link" type="submit" value="Submit">
-      </div>
-    </form>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <form name="elapsed_time" method="post" action="/submit">
+          <div class="field">
+            <input class="input" type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
+          </div>
+          <div class="control">
+            <input class="button is-link" type="submit" value="Submit">
+          </div>
+        </div>
+      </form>
+    </div>
     {% if prediction == True %}
     <div class="results">
       {% for milestone, result in results.items() %}
