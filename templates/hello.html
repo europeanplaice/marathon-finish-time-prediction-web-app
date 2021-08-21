@@ -81,7 +81,7 @@
         <form name="elapsed_time" method="post" action="/submit">
           <div class="field">
             <p>Marks must be separated by comma.</p>
-            <input class="input" type="text" placeholder="0:30:0, 1:01:0 ..." name="record" required id="time_input">
+            <input class="input" type="text" placeholder="0:30:0, 1:01:0 ..." name="record" required id="time_input" value="{{ input_value }}">
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">

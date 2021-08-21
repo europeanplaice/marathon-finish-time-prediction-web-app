@@ -19,7 +19,9 @@ def hello_world(name="Tomo"):
 def process():
     results = main(
         ["--do_predict", "--elapsed_time", request.form['record']])
-    return render_template("hello.html", results=results, prediction=True)
+    return render_template(
+        "hello.html", results=results,
+        prediction=True, input_value=request.form['record'])
 
 
 
