@@ -53,16 +53,26 @@ def main(param=None):
         finish_time_predictor.load_weights(args)
         finish_time_predictor.validate(eval_onebatch_dataset, args)
     if args.do_predict:
+        args.elapsed_time = args.elapsed_time.replace(";", ":")
+        args.elapsed_time = args.elapsed_time.replace(" ", "")
+        elapsed_time_list = args.elapsed_time.split(",")
+        for i in range(len(elapsed_time_list)):
+            print(elapsed_time_list[i])
+            if len(elapsed_time_list[i].split(":")) == 2:
+                elapsed_time_list[i] = "0:" + elapsed_time_list[i]
+            elif len(elapsed_time_list[i].split(":")) == 1:
+                elapsed_time_list[i] = "0:" + elapsed_time_list[i] + ":0"
+            elapsed_time_list[i] = elapsed_time_list[i].replace("::", ":")
         finish_time_predictor.load_weights(args)
         if args.elapsed_time_what_if is not None:
             predicted_time = finish_time_predictor.predict(
-                args.elapsed_time.split(","),
+                elapsed_time_list,
                 args,
                 args.elapsed_time_what_if.split(","),
             )
         else:
             predicted_time = finish_time_predictor.predict(
-                args.elapsed_time.split(","),
+                elapsed_time_list,
                 args,
             )
         return predicted_time
