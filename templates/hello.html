@@ -2,6 +2,7 @@
 <html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <head>
+  <title>Marathon Finish Time Prediction</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <style>
     form {
@@ -25,7 +26,8 @@
     }
 
     .result {
-      border: 1px solid black;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
       margin-right: 1em;
       margin-top: 1em;
       padding: 0.5em;
@@ -43,8 +45,14 @@
       font-size: 1.5em;
     }
 
+    h1 {
+      font-size: 2em;
+    }
     h2 {
       font-size: 2em;
+    }
+    h3 {
+      font-size: 1.5em;
     }
 
   </style>
@@ -52,9 +60,10 @@
 
 <body>
   <div class="container">
+    <h1>Marathon Finish Time Prediction</h1>
     <div class="columns">
       <div class="column">
-        <p>Hello!</p>
+        <p>Hello! It predicts your marathon's record by splits.</p>
         <p>Please input your elapsed time.</p>
       </div>
     </div>
@@ -62,7 +71,7 @@
       <div class="column">
         <form name="elapsed_time" method="post" action="/submit">
           <div class="field">
-            <input class="input" type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
+            <input class="input" type="text" placeholder="0:30:0, 1:01:0 ..." name="record" required>
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">
