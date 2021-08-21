@@ -130,13 +130,23 @@ class FinishTimePredictor():
                          one_dim_decoder_data=None, batch_idx=0):
         print("**Estimation**")
         estimation_strings = []
+        estimation_dict = {}
         for i in range(len(MILESTONE)):
             kmidx = MILESTONE[i]
+            
             if i < len(one_dim_encoder_data):
                 actual_data = one_dim_encoder_data[i].ljust(10)
                 estimated_data = \
                     "lower_95 => ******* lower_50 => ******* median => ******* " \
                     "upper_50 => ******* upper_95 => *******"
+                estimation_dict[f"{kmidx}"] = {}
+                estimation_dict[f"{kmidx}"]["actual_data"] = actual_data
+                estimation_dict[f"{kmidx}"]["lower_95"] = "*******"
+                estimation_dict[f"{kmidx}"]["lower_50"] = "*******"
+                estimation_dict[f"{kmidx}"]["median"] = "*******"
+                estimation_dict[f"{kmidx}"]["upper_50"] = "*******"
+                estimation_dict[f"{kmidx}"]["upper_95"] = "*******"
+
             else:
                 if one_dim_decoder_data is not None:
                     actual_data = \
@@ -160,13 +170,21 @@ class FinishTimePredictor():
                     f"median => {middle} " \
                     f"upper_50 => {upper_50} " \
                     f"upper_95 => {upper_95} "
+                estimation_dict[f"{kmidx}"] = {}
+                estimation_dict[f"{kmidx}"]["actual_data"] = actual_data
+                estimation_dict[f"{kmidx}"]["lower_95"] = lower_95
+                estimation_dict[f"{kmidx}"]["lower_50"] = lower_50
+                estimation_dict[f"{kmidx}"]["median"] = middle
+                estimation_dict[f"{kmidx}"]["upper_50"] = upper_50
+                estimation_dict[f"{kmidx}"]["upper_95"] = upper_95
+
             print(
                 kmidx.ljust(10),
                 actual_data, estimated_data
             )
             estimation_strings.append(
                 f"{kmidx.ljust(10)} {actual_data} {estimated_data}")
-        return estimation_strings
+        return estimation_dict
 
 
 class Graph():

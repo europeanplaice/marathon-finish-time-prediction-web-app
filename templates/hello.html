@@ -1,10 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <style>
+    form {
+      margin-top: 0.5em;
+    }
+
+    .results {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 3em;
+    }
+
+    .result {
+      border: 1px solid black;
+      margin-right: 1em;
+      margin-top: 1em;
+      min-width: 200px;
+      padding: 0.5em;
+    }
+
+    .input {
+      max-width :200px;
+    }
+
+    .note {
+      font-size: 0.9em;
+    }
+    .time {
+      font-size: 1.5em;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+
+  </style>
+</head>
+
 <body>
-  <p>Hello {{ name }}, </p>
-  <p>Please input your elapsed time</p>
-  <form name="elapsed_time" method="post" action="/submit">
-    <input type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
-    <input type="submit" value="Submit">
-  </form>
-  
-  {{ result }}
+  <div class="container">
+    <p>Hello!</p>
+    <p>Please input your elapsed time.</p>
+    <form name="elapsed_time" method="post" action="/submit">
+      <div class="field">
+        <input class="input" type="text" placeholder="0:30:0,1:01:0 ..." name="record" required>
+      </div>
+      <div class="control">
+        <input class="button is-link" type="submit" value="Submit">
+      </div>
+    </form>
+    {% if prediction == True %}
+    <div class="results">
+      {% for milestone, result in results.items() %}
+        <div class="result">
+          <h2>{{ milestone }}</h2>
+          <h3>{{ result.actual_data }}</h3>
+          <div class="note lower_95">
+            Your time will be at least higher than 
+          </div>
+          <div class="time lower_95">{{ result.lower_95 }}</div>
+          <div class="note lower_50">probably than </div>
+          <div class="time lower_50">{{ result.lower_50 }}</div>
+          <div class="note middle">Most likely to be </div>
+          <div class="time middle">{{ result.median }}</div>
+          <div class="note upper_50">It also will be lower probably than </div>
+          <div class="time upper_50">{{ result.upper_50 }}</div>
+          <div class="note upper_95">at least lower than </div>
+          <div class="time upper_95">{{ result.upper_95 }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
 </body>
+
+</html>
