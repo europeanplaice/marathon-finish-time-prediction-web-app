@@ -49,7 +49,7 @@
     }
 
     .note {
-      font-size: 0.9em;
+      font-size: 1em;
     }
     .time {
       font-size: 1.5em;
@@ -66,13 +66,17 @@
       font-size: 2em;
     }
     h3 {
-      font-size: 1.5em;
+      font-size: 1.8em;
     }
 
     footer{
       text-align:center;
       margin-top: 2em;
       margin-bottom: 2em;
+    }
+
+    #time_input{
+      margin-top: 0.5em;
     }
 
   </style>
@@ -91,8 +95,9 @@
       <div class="column">
         <form name="elapsed_time" method="post" action="/submit">
           <div class="field">
-            <p>Marks must be separated by a comma. The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
-            <input class="input" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}">
+            <p>Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.</p>
+            <p>The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
+            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}">
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">
@@ -110,7 +115,7 @@
           <div class="time lower_95">{{ result.lower_95 }}</div>
           <div class="note lower_50">Even if not, shifting into high gear, your mark will be </div>
           <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">Your mark is most likely to be </div>
+          <div class="note middle">The most likely prediction is</div>
           <div class="time middle">{{ result.median }}</div>
           <div class="note upper_50">Or, if you feel a little bit tired, I'm afraid your mark will be </div>
           <div class="time upper_50">{{ result.upper_50 }}</div>
