@@ -12,7 +12,7 @@
     gtag('config', 'G-LVCKJQ30LZ');
   </script>
   <title>Marathon Finish Time Prediction</title>
-  <meta name="description" content="Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning.">
+  <meta name="description" content="Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <style>
     form {
@@ -83,16 +83,16 @@
     <h1>Marathon Finish Time Prediction</h1>
     <div class="columns">
       <div class="column">
-        <p>Hello! It predicts your marathon's record by splits.</p>
-        <p>Please input your elapsed time.</p>
+        <p>It predicts your marathon's record by your own splits.</p>
+        <p>Please input your splits.</p>
       </div>
     </div>
     <div class="columns">
       <div class="column">
         <form name="elapsed_time" method="post" action="/submit">
           <div class="field">
-            <p>Marks must be separated by comma.</p>
-            <input class="input" type="text" placeholder="0:30:0, 1:01:0 ..." name="record" required id="time_input" value="{{ input_value }}">
+            <p>Marks must be separated by a comma. The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
+            <input class="input" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}">
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">
@@ -106,17 +106,15 @@
         <div class="result">
           <h2>{{ milestone }}</h2>
           <h3>{{ result.actual_data }}</h3>
-          <div class="note lower_95">
-            Your time will be at least higher than 
-          </div>
+          <div class="note lower_95">Running super fast, your mark would be </div>
           <div class="time lower_95">{{ result.lower_95 }}</div>
-          <div class="note lower_50">probably than </div>
+          <div class="note lower_50">Even if not, shifting into high gear, your mark will be </div>
           <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">Most likely to be </div>
+          <div class="note middle">Your mark is most likely to be </div>
           <div class="time middle">{{ result.median }}</div>
-          <div class="note upper_50">It also will be lower probably than </div>
+          <div class="note upper_50">Or, if you feel a little bit tired, I'm afraid your mark will be </div>
           <div class="time upper_50">{{ result.upper_50 }}</div>
-          <div class="note upper_95">at least lower than </div>
+          <div class="note upper_95">If you feel exhausted, your mark would be </div>
           <div class="time upper_95">{{ result.upper_95 }}</div>
         </div>
       {% endfor %}
