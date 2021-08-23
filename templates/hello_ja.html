@@ -87,16 +87,16 @@
     <h1>Marathon Finish Time Prediction</h1>
     <div class="columns">
       <div class="column">
-        <p>It predicts your marathon's record by your own splits.</p>
-        <p>Please input your splits.</p>
+        <p>スプリットタイムに基づいてゴールまでのタイムを予測します。</p>
+        <p>スプリットタイムを入力してください。</p>
       </div>
     </div>
     <div class="columns">
       <div class="column">
-        <form name="elapsed_time" method="post" action="en/submit">
+        <form name="elapsed_time" method="post" action="ja/submit">
           <div class="field">
-            <p>Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.</p>
-            <p>The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
+            <p>スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。</p>
+            <p>入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。</p>
             <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}">
           </div>
           <div class="control">
@@ -111,15 +111,15 @@
         <div class="result">
           <h2>{{ milestone }}</h2>
           <h3>{{ result.actual_data }}</h3>
-          <div class="note lower_95">Running super fast, your mark would be </div>
+          <div class="note lower_95">予測より大幅に早まった場合</div>
           <div class="time lower_95">{{ result.lower_95 }}</div>
-          <div class="note lower_50">Even if not, shifting into high gear, your mark will be </div>
+          <div class="note lower_50">予測よりやや早まった場合</div>
           <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">The most likely prediction is</div>
+          <div class="note middle">最も標準的な予測タイム</div>
           <div class="time middle">{{ result.median }}</div>
-          <div class="note upper_50">Or, if you feel a little bit tired, I'm afraid your mark will be </div>
+          <div class="note upper_50">予測よりやや遅れた場合</div>
           <div class="time upper_50">{{ result.upper_50 }}</div>
-          <div class="note upper_95">If you feel exhausted, your mark would be </div>
+          <div class="note upper_95">予測より大幅に遅れた場合</div>
           <div class="time upper_95">{{ result.upper_95 }}</div>
         </div>
       {% endfor %}
@@ -128,7 +128,7 @@
     <footer>
       <a href="https://github.com/europeanplaice/marathon-finish-time-prediction"><img src="/static/images/GitHub-Mark-64px.png" alt="link to github repository" width="32" height="32"></a>
       <hr>
-      <a href="/ja">Switch to Japanese</a>
+      <a href="/en">Switch to English</a>
     </footer>
   </div>
 </body>
