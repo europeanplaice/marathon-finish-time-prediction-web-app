@@ -25,6 +25,11 @@ def hello_world_ja():
     return render_template("hello_ja.html", prediction=False)
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
 @app.route('/<string:text>/submit', methods=['POST', 'GET'])
 def process(text):
     if request.method == 'POST':
