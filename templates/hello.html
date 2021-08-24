@@ -99,7 +99,7 @@
           <div class="field">
             <p>Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.</p>
             <p>The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
-            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}">
+            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">
