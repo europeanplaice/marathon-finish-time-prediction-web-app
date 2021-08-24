@@ -97,7 +97,7 @@
           <div class="field">
             <p>スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。</p>
             <p>入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。</p>
-            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,*\s*))+$">
+            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
           </div>
           <div class="control">
             <input class="button is-link" type="submit" value="Submit">
