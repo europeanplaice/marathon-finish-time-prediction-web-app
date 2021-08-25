@@ -1,138 +1,18 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-  <link rel="alternate" hreflang="ja" href="https://sleepy-tundra-61541.herokuapp.com/ja"/>
-  <link rel="alternate" hreflang="en" href="https://sleepy-tundra-61541.herokuapp.com/en"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCKJQ30LZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-LVCKJQ30LZ');
-  </script>
-  <title>マラソンフィニッシュタイム予測</title>
-  <meta name="description" content="機械学習を用い、スプリットタイムからマラソンのフィニッシュタイムを予測します。具体的なタイムだけではなく、予想誤差も計算し表示します。">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
-  <style>
-    form {
-      margin-top: 0.5em;
-    }
-
-    .container {
-      width: 80%;
-      margin-left: 10%;
-      margin-right: 10%;
-    }
-
-    .column {
-      max-width: 100%;
-    }
-
-    .results {
-      display: flex;
-      flex-wrap: wrap; 
-      margin-bottom: 2em;
-    }
-
-    .result {
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-      margin-right: 1em;
-      margin-top: 1em;
-      padding: 0.5em;
-      /* min-width: 50%; */
-    }
-
-    .input {
-      max-width :600px;
-    }
-
-    .note {
-      font-size: 1em;
-    }
-    .time {
-      font-size: 1.5em;
-    }
-
-    .time.middle{
-      font-size: 1.8em;
-    }
-
-    h1 {
-      font-size: 2em;
-    }
-    h2 {
-      font-size: 2em;
-    }
-    h3 {
-      font-size: 1.8em;
-    }
-
-    footer{
-      text-align:center;
-      margin-top: 2em;
-      margin-bottom: 2em;
-    }
-
-    #time_input{
-      margin-top: 0.5em;
-    }
-
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>マラソンフィニッシュタイム予測</h1>
-    <div class="columns">
-      <div class="column">
-        <p>スプリットタイムに基づいてゴールまでのタイムを予測します。</p>
-        <p>スプリットタイムを入力してください。</p>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
-        <form name="elapsed_time" method="post" action="/ja/submit">
-          <div class="field">
-            <p>スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。</p>
-            <p>入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。</p>
-            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
-          </div>
-          <div class="control">
-            <input class="button is-link" type="submit" value="Submit">
-          </div>
-        </div>
-      </form>
-    </div>
-    {% if prediction == True %}
-    <div class="results">
-      {% for milestone, result in results.items() %}
-        <div class="result">
-          <h2>{{ milestone }}</h2>
-          <h3>{{ result.actual_data }}</h3>
-          <div class="note lower_95">予測より大幅に早まった場合</div>
-          <div class="time lower_95">{{ result.lower_95 }}</div>
-          <div class="note lower_50">予測よりやや早まった場合</div>
-          <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">最も標準的な予測タイム</div>
-          <div class="time middle">{{ result.median }}</div>
-          <div class="note upper_50">予測よりやや遅れた場合</div>
-          <div class="time upper_50">{{ result.upper_50 }}</div>
-          <div class="note upper_95">予測より大幅に遅れた場合</div>
-          <div class="time upper_95">{{ result.upper_95 }}</div>
-        </div>
-      {% endfor %}
-    </div>
-    {% endif %}
-    <footer>
-      <a href="https://github.com/europeanplaice/marathon-finish-time-prediction-web-app"><img src="/static/images/GitHub-Mark-64px.png" alt="link to github repository" width="32" height="32"></a>
-      <hr>
-      <a href="/en">Switch to English</a>
-    </footer>
-  </div>
-</body>
-
-</html>
+{% extends "hello.html" %}
+{% block lang %}ja{% endblock %}
+{% block lang2 %}ja{% endblock %}
+{% block title %}マラソンフィニッシュタイム予測{% endblock %}
+{% block description %}機械学習を用い、スプリットタイムからマラソンのフィニッシュタイムを予測します。具体的なタイムだけではなく、予想誤差も計算し表示します。{% endblock %}
+{% block h1 %}マラソンフィニッシュタイム予測{% endblock %}
+{% block p1 %}スプリットタイムに基づいてゴールまでのタイムを予測します。{% endblock %}
+{% block p2 %}スプリットタイムを入力してください。{% endblock %}
+{% block form1 %}スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。{% endblock %}
+{% block form2 %}入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。{% endblock %}
+{% block lower_95 %}予測より大幅に早まった場合{% endblock %}
+{% block lower_50 %}予測よりやや早まった場合{% endblock %}
+{% block middle %}最も標準的な予測タイム{% endblock %}
+{% block upper_50 %}予測よりやや遅れた場合{% endblock %}
+{% block upper_95 %}予測より大幅に遅れた場合{% endblock %}
+{% block changelang %}
+<a href="/en">Switch to English</a>
+{% endblock %}

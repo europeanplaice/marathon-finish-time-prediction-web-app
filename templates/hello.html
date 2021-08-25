@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% block lang %}en{% endblock %}">
   <head>
   <link rel="alternate" hreflang="ja" href="https://sleepy-tundra-61541.herokuapp.com/ja"/>
   <link rel="alternate" hreflang="en" href="https://sleepy-tundra-61541.herokuapp.com/en"/>
@@ -13,8 +13,8 @@
 
     gtag('config', 'G-LVCKJQ30LZ');
   </script>
-  <title>Marathon Finish Time Prediction</title>
-  <meta name="description" content="Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.">
+  <title>{% block title %}Marathon Finish Time Prediction{% endblock %}</title>
+  <meta name="description" content="{% block description %}Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.{% endblock %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
   <style>
     form {
@@ -23,8 +23,7 @@
 
     .container {
       width: 80%;
-      margin-left: 10%;
-      margin-right: 10%;
+      margin: 0 auto;
     }
 
     .column {
@@ -86,19 +85,19 @@
 
 <body>
   <div class="container">
-    <h1>Marathon Finish Time Prediction</h1>
+    <h1>{% block h1 %}Marathon Finish Time Prediction{% endblock %}</h1>
     <div class="columns">
       <div class="column">
-        <p>It predicts your marathon's record by your own splits.</p>
-        <p>Please input your splits.</p>
+        <p>{% block p1 %}It predicts your marathon's record by your own splits.{% endblock %}</p>
+        <p>{% block p2 %}Please input your splits.{% endblock %}</p>
       </div>
     </div>
     <div class="columns">
       <div class="column">
-        <form name="elapsed_time" method="post" action="/en/submit">
+        <form name="elapsed_time" method="post" action="/{% block lang2 %}en{% endblock %}/submit">
           <div class="field">
-            <p>Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.</p>
-            <p>The time format is H:MM:SS but you can omit hour(H) if it is zero.</p>
+            <p>{% block form1 %}Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.{% endblock %}</p>
+            <p>{% block form2 %}The time format is H:MM:SS but you can omit hour(H) if it is zero.{% endblock %}</p>
             <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
           </div>
           <div class="control">
@@ -113,15 +112,15 @@
         <div class="result">
           <h2>{{ milestone }}</h2>
           <h3>{{ result.actual_data }}</h3>
-          <div class="note lower_95">Running super fast, your mark would be </div>
+          <div class="note lower_95">{% block lower_95 %}Running super fast, your mark would be {% endblock %}</div>
           <div class="time lower_95">{{ result.lower_95 }}</div>
-          <div class="note lower_50">Even if not, shifting into high gear, your mark will be </div>
+          <div class="note lower_50">{% block lower_50 %}Even if not, shifting into high gear, your mark will be {% endblock %}</div>
           <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">The most likely prediction is</div>
+          <div class="note middle">{% block middle %}The most likely prediction is{% endblock %}</div>
           <div class="time middle">{{ result.median }}</div>
-          <div class="note upper_50">Or, if you feel a little bit tired, I'm afraid your mark will be </div>
+          <div class="note upper_50">{% block upper_50 %}Or, if you feel a little bit tired, I'm afraid your mark will be {% endblock %}</div>
           <div class="time upper_50">{{ result.upper_50 }}</div>
-          <div class="note upper_95">If you feel exhausted, your mark would be </div>
+          <div class="note upper_95">{% block upper_95 %}If you feel exhausted, your mark would be {% endblock %}</div>
           <div class="time upper_95">{{ result.upper_95 }}</div>
         </div>
       {% endfor %}
@@ -130,7 +129,9 @@
     <footer>
       <a href="https://github.com/europeanplaice/marathon-finish-time-prediction-web-app"><img src="/static/images/GitHub-Mark-64px.png" alt="link to github repository" width="32" height="32"></a>
       <hr>
+      {% block changelang %}
       <a href="/ja">Switch to Japanese</a>
+      {% endblock %}
     </footer>
   </div>
 </body>
