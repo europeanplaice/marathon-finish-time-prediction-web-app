@@ -20,7 +20,7 @@ def before_request():
 
 @app.route('/')
 def to_english():
-    return redirect("/en")
+    return render_template("hello.html", prediction=False)
 
 
 @app.route('/en')
