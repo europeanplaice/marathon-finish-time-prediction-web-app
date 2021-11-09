@@ -112,16 +112,18 @@
         <div class="result">
           <h2>{{ milestone }}</h2>
           <h3>{{ result.actual_data }}</h3>
-          <div class="note lower_95">{% block lower_95 %}Running super fast, your mark would be {% endblock %}</div>
-          <div class="time lower_95">{{ result.lower_95 }}</div>
-          <div class="note lower_50">{% block lower_50 %}Even if you are not running super fast, shifting into high gear, your mark would be {% endblock %}</div>
-          <div class="time lower_50">{{ result.lower_50 }}</div>
-          <div class="note middle">{% block middle %}The most likely prediction is{% endblock %}</div>
-          <div class="time middle">{{ result.median }}</div>
-          <div class="note upper_50">{% block upper_50 %}Or, if you feel a little bit tired, I'm afraid your mark would be {% endblock %}</div>
-          <div class="time upper_50">{{ result.upper_50 }}</div>
-          <div class="note upper_95">{% block upper_95 %}If you feel exhausted, your mark would be {% endblock %}</div>
-          <div class="time upper_95">{{ result.upper_95 }}</div>
+          {% if result.actual_data == "" %}
+            <div class="note lower_95">{% block lower_95 %}Running super fast, your mark would be {% endblock %}</div>
+            <div class="time lower_95">{{ result.lower_95 }}</div>
+            <div class="note lower_50">{% block lower_50 %}Even if you are not running super fast, shifting into high gear, your mark would be {% endblock %}</div>
+            <div class="time lower_50">{{ result.lower_50 }}</div>
+            <div class="note middle">{% block middle %}The most likely prediction is{% endblock %}</div>
+            <div class="time middle">{{ result.median }}</div>
+            <div class="note upper_50">{% block upper_50 %}Or, if you feel a little bit tired, I'm afraid your mark would be {% endblock %}</div>
+            <div class="time upper_50">{{ result.upper_50 }}</div>
+            <div class="note upper_95">{% block upper_95 %}If you feel exhausted, your mark would be {% endblock %}</div>
+            <div class="time upper_95">{{ result.upper_95 }}</div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
