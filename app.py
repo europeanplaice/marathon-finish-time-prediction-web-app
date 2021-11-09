@@ -1,14 +1,11 @@
 from flask import Flask
 from flask import render_template, request, redirect
-import argparse
 
-from finish_time_predictor import Decoder, Encoder, FinishTimePredictor
-from finish_time_predictor import MILESTONE
-from utils import (makedataset, preprocess_rawdata)
 from main import main
 import os
 
 app = Flask(__name__)
+
 
 @app.before_request
 def before_request():
@@ -20,17 +17,17 @@ def before_request():
 
 @app.route('/')
 def to_english():
-    return render_template("hello.html", prediction=False)
+    return render_template("index.html", prediction=False)
 
 
 @app.route('/en')
-def hello_world():
-    return render_template("hello.html", prediction=False)
+def index():
+    return render_template("index.html", prediction=False)
 
 
 @app.route('/ja')
-def hello_world_ja():
-    return render_template("hello_ja.html", prediction=False)
+def index_ja():
+    return render_template("index_ja.html", prediction=False)
 
 
 @app.errorhandler(404)
@@ -42,9 +39,9 @@ def page_not_found(error):
 def process(text):
     if request.method == 'POST':
         if text == "ja":
-            html_path = "hello_ja.html"
+            html_path = "index_ja.html"
         else:
-            html_path = "hello.html"
+            html_path = "index.html"
         results = main(
             ["--do_predict", "--elapsed_time", request.form['record']])
         return render_template(
