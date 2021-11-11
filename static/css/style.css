@@ -1,0 +1,62 @@
+form {
+    margin-top: 0.5em;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .column {
+    max-width: 100%;
+  }
+
+  .results {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-bottom: 2em;
+  }
+
+  .result {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-right: 1em;
+    margin-top: 1em;
+    padding: 0.5em;
+    /* min-width: 50%; */
+  }
+
+  .input {
+    max-width :600px;
+  }
+
+  .note {
+    font-size: 1em;
+  }
+  .time {
+    font-size: 1.5em;
+  }
+
+  .time.middle{
+    font-size: 1.8em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.8em;
+  }
+
+  footer{
+    text-align:center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  #time_input{
+    margin-top: 0.5em;
+  }

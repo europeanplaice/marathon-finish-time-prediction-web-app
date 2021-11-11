@@ -1,7 +1,44 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>How this model predicts a time</h1>
-    <p>I used machine learning to predict marathon. </p>
-  </body>
-</html>
+<html lang="{% block lang %}en{% endblock %}">
+
+<head>
+  <link rel="alternate" hreflang="ja" href="https://sleepy-tundra-61541.herokuapp.com/ja" />
+  <link rel="alternate" hreflang="en" href="https://sleepy-tundra-61541.herokuapp.com/en" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCKJQ30LZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-LVCKJQ30LZ');
+  </script>
+  <title>Explanation of mechanism | Marathon Finish Time Prediction</title>
+  <meta name="description"
+    content="It explains how this website predicts marathon finish time. It uses machine learning algorithms and finds common patterns of each runner.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print"
+    onload="this.media='all'">
+  <link rel="stylesheet" href="static/css/style.css">
+  <style>
+    .container {
+      width: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container is-size-5">
+    <h1>How it predicts</h1>
+    <p>Machine learning is a powerful tool to find patterns of many kinds of fields such as images, signals, and
+      bioinformatics. We are also seeing that it can apply to sports in recent years. Marathon's split times are one of
+      the common patterns for us. Overall, runners run splits at the same pace, and it is not a difficult task to
+      predict the finish time.
+      However, it is hard to keep running at the same speed because of some conditions such as weather, runners'
+      experience, how rivals run, etc. Though we can't forecast the exact finish time, we can do with a range of
+      estimates because there exist common patterns of split times. You don't have to input conditions except for your
+      splits. Instead, I trained a machine learning model with past marathons' public records to detect the typical
+      paces of each runner.
+    </p>
+  </div>
+</body>
