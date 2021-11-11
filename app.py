@@ -15,6 +15,11 @@ def before_request():
         return redirect(url, code=code)
 
 
+@app.route('/explain')
+def how_it_predicts():
+    return render_template("explain.html", prediction=False)
+
+
 @app.route('/')
 def to_english():
     return render_template("index.html", prediction=False)
