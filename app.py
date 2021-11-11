@@ -7,12 +7,12 @@ import os
 app = Flask(__name__)
 
 
-# @app.before_request
-# def before_request():
-#     if not request.is_secure and os.environ.get('FLASK_ENV') != 'development':
-#         url = request.url.replace('http://', 'https://', 1)
-#         code = 301
-#         return redirect(url, code=code)
+@app.before_request
+def before_request():
+    if not request.is_secure and os.environ.get('FLASK_ENV') != 'development':
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 
 @app.route('/explain')
