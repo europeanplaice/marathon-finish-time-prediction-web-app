@@ -15,9 +15,9 @@ def before_request():
         return redirect(url, code=code)
 
 
-@app.route('/explain')
+@app.route('/explaination')
 def how_it_predicts():
-    return render_template("explain.html", prediction=False)
+    return render_template("explaination.html", prediction=False)
 
 
 @app.route('/')

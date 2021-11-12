@@ -17,7 +17,6 @@
   <meta name="description" content="{% block description %}Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.{% endblock %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/static/css/style.css">
-
 </head>
 
 <body>
@@ -35,11 +34,12 @@
           <div class="field">
             <p>{% block form1 %}Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.{% endblock %}</p>
             <p>{% block form2 %}The time format is H:MM:SS but you can omit hour(H) if it is zero.{% endblock %}</p>
-            <p><a href="/explain">How it predicts</a></p>
+            <p>{% block form3 %}For example, if your times are 30 minutes at 5km and 65 minutes at 10km, the input is "<b>30:0, 1:05:0</b>".{% endblock %}</p>
+            {% block explanation %}<p><a href="{{ url_for('how_it_predicts') }}">How it predicts</a></p>{% endblock %}
             <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
           </div>
           <div class="control">
-            <input class="button is-link" type="submit" value="Submit">
+            {% block submit %}<input class="button is-link" type="submit" value="Submit">{% endblock %}
           </div>
         </div>
       </form>

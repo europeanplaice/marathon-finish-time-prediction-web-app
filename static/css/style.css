@@ -1,6 +1,13 @@
-form {
-    margin-top: 0.5em;
+  body{
+    font-size: 1.2rem;
   }
+  .breadcrumb{
+    margin-top: 1rem;
+  }
+
+  form {
+      margin-top: 0.5em;
+    }
 
   .container {
     width: 80%;
@@ -23,7 +30,7 @@ form {
     margin-right: 1em;
     margin-top: 1em;
     padding: 0.5em;
-    /* min-width: 50%; */
+    max-width: 400px;
   }
 
   .input {
