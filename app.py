@@ -42,15 +42,15 @@ def page_not_found(error):
 
 @app.route('/<string:text>/submit', methods=['POST', 'GET'])
 def process(text):
-    if request.method == 'POST':
+    if request.method == 'GET':
         if text == "ja":
             html_path = "index_ja.html"
         else:
             html_path = "index.html"
         results = main(
-            ["--do_predict", "--elapsed_time", request.form['record']])
+            ["--do_predict", "--elapsed_time", request.args.get('record')])
         return render_template(
             html_path, results=results,
-            prediction=True, input_value=request.form['record'])
+            prediction=True, input_value=request.args.get('record'))
     else:
         return redirect("/" + text)

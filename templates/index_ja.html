@@ -9,7 +9,7 @@
 {% block form1 %}スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。{% endblock %}
 {% block form2 %}入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。{% endblock %}
 {% block form3 %}例えば、5kmで30分、10kmで65分であれば入力は "<b>30:0, 1:05:0</b>"となります。{% endblock %}
-{% block submit %}<input class="button is-link" type="submit" value="送信">{% endblock %}
+{% block submit %}<input class="button is-link" type="submit" value="予測">{% endblock %}
 {% block lower_95 %}予測より大幅に早まった場合{% endblock %}
 {% block lower_50 %}予測よりやや早まった場合{% endblock %}
 {% block middle %}最も標準的な予測タイム{% endblock %}

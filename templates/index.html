@@ -30,7 +30,7 @@
     </div>
     <div class="columns">
       <div class="column">
-        <form name="elapsed_time" method="post" action="/{% block lang2 %}en{% endblock %}/submit">
+        <form name="elapsed_time" method="get" action="/{% block lang2 %}en{% endblock %}/submit">
           <div class="field">
             <p>{% block form1 %}Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.{% endblock %}</p>
             <p>{% block form2 %}The time format is H:MM:SS but you can omit hour(H) if it is zero.{% endblock %}</p>
@@ -39,7 +39,7 @@
             <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
           </div>
           <div class="control">
-            {% block submit %}<input class="button is-link" type="submit" value="Submit">{% endblock %}
+            {% block submit %}<input class="button is-link" type="submit" value="Predict">{% endblock %}
           </div>
         </div>
       </form>
