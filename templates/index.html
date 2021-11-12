@@ -47,9 +47,11 @@
     {% if prediction == True %}
     <div class="results">
       {% for milestone, result in results.items() %}
-        <div class="result">
+        <div class="result" id="result_{{ milestone }}">
           <h2>{{ milestone }}</h2>
-          <h3>{{ result.actual_data }}</h3>
+          {% if result.actual_data != "          "%}
+            <h3>{{ result.actual_data }}</h3>
+          {% endif %}
           <div class="note lower_95">{% block lower_95 %}Running super fast, your mark would be {% endblock %}</div>
           <div class="time lower_95">{{ result.lower_95 }}</div>
           <div class="note lower_50">{% block lower_50 %}Even if you are not running super fast, shifting into high gear, your mark would be {% endblock %}</div>
