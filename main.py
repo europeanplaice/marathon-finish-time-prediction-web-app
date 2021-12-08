@@ -54,9 +54,11 @@ def main(param=None):
         finish_time_predictor.validate(eval_onebatch_dataset, args)
     if args.do_predict:
         args.elapsed_time = args.elapsed_time[:-1]
+        print(args.elapsed_time)
         # args.elapsed_time = args.elapsed_time.replace(";", ":")
         # args.elapsed_time = args.elapsed_time.replace(" ", "")
         elapsed_time_list = args.elapsed_time.split(",")
+        print(elapsed_time_list)
         for i in range(len(elapsed_time_list)):
             print(elapsed_time_list[i])
             # if len(elapsed_time_list[i].split(":")) == 2:
