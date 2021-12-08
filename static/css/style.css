@@ -14,9 +14,9 @@
     margin: 0 auto;
   }
 
-  .column {
+  /* .column {
     max-width: 100%;
-  }
+  } */
 
   .results {
     display: flex;
@@ -54,7 +54,13 @@
   }
 
   .splits{
-    max-width: 200px;
+    max-width: 180px;
+  }
+  label{
+    width: 60px;
+  }
+  .control{
+    margin-top: 0.5em
   }
 
   h1 {
