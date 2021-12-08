@@ -62,7 +62,6 @@
       // let lasttime = document.getElementById(lastdistance).value;
       newInput.setAttribute("type", "time");
       newInput.setAttribute("step", "1");
-      newInput.setAttribute("min", lasttime);
       newInput.setAttribute("value", lasttime);
       newInput.setAttribute("class", "input is-info splits");
       newInput.setAttribute("id", newdistance);
@@ -154,7 +153,7 @@
         <form name="elapsed_time" method="get" action="/{% block lang2 %}en{% endblock %}/submit">
           <div class="field">
 
-            <input name="record" value="" type="hidden" id="record">
+            <input name="q" value="" type="hidden" id="record">
             <p><a id="reset">{% block reset_split %}reset split{% endblock %}</a></p>
             <div class="distances">
               <label for="5km" class="distance">5km</label>

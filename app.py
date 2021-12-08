@@ -48,9 +48,9 @@ def process(text):
         else:
             html_path = "index.html"
         results = main(
-            ["--do_predict", "--elapsed_time", request.args.get('record')])
+            ["--do_predict", "--elapsed_time", request.args.get('q')])
         return render_template(
             html_path, results=results,
-            prediction=True, input_value=request.args.get('record'))
+            prediction=True, input_value=request.args.get('q'))
     else:
         return redirect("/" + text)
