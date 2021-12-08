@@ -48,6 +48,15 @@
     font-size: 1.8em;
   }
 
+  .distances{
+    margin-top: 1em;
+    display: flex;
+  }
+
+  .splits{
+    max-width: 200px;
+  }
+
   h1 {
     font-size: 2em;
   }

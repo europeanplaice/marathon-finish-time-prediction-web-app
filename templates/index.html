@@ -13,6 +13,124 @@
 
     gtag('config', 'G-LVCKJQ30LZ');
   </script>
+  <script>
+    let gather_time = () => {
+      let query = "";
+      document.querySelectorAll(".splits").forEach((e) => {
+        query = query.concat(e.value, ",");
+        sessionStorage.setItem(e.getAttribute("id"), e.value);
+      })
+      let elem = document.querySelector("#record");
+      elem.value = query;
+      return query
+    }
+
+    let initial_set = () => {
+      let ar = ["5km", "10km", "15km", "20km", "half", "25km", "30km", "35km", "40km"];
+      for (let i in ar) {
+        if (sessionStorage.getItem(ar[i]) != null) {
+          if (document.getElementById(ar[i])){
+            document.getElementById(ar[i]).value = sessionStorage.getItem(ar[i])
+          } else {
+            create_element(sessionStorage.getItem(ar[i]), ar[i])
+            sessionStorage.setItem("distance", ar[i])
+          }
+        }
+      }
+
+      // for (var i = 0; i < sessionStorage.length; i++){
+      //   if (sessionStorage.key(i) != "distance") {
+      //     create_element(sessionStorage.getItem(sessionStorage.key(i)), sessionStorage.key(i))
+      //   }
+      //   sessionStorage.getItem(sessionStorage.key(i));
+      // }
+    }
+
+    let reset = () => {
+      sessionStorage.clear();
+      location.reload()
+    }
+
+    let create_element = (lasttime, newdistance) => {
+      let newDiv = document.createElement("div");
+      newDiv.setAttribute("class", "distances");
+      let newLabel = document.createElement("label");
+      let newInput = document.createElement("input");
+      newLabel.textContent = newdistance;
+      newLabel.setAttribute("for", newdistance);
+      // let lasttime = document.getElementById(lastdistance).value;
+      newInput.setAttribute("type", "time");
+      newInput.setAttribute("step", "1");
+      newInput.setAttribute("min", lasttime);
+      newInput.setAttribute("value", lasttime);
+      newInput.setAttribute("class", "input is-info splits");
+      newInput.setAttribute("id", newdistance);
+      newDiv.appendChild(newLabel);
+      newDiv.appendChild(newInput);
+      let parent = document.querySelector(".field")
+      parent.appendChild(newDiv)
+      document.querySelectorAll(".splits").forEach((e) => {
+        e.addEventListener("change", gather_time, false);
+      })
+    }
+
+    window.onload = () => {
+      sessionStorage.setItem('distance', '5km');
+      let elem = document.querySelector("#add_split");
+      elem.addEventListener("click", () => {
+        if (sessionStorage.getItem("distance") == "5km") {
+          create_element(document.getElementById("5km").value, "10km");
+          sessionStorage.setItem('distance', '10km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "10km") {
+          create_element(document.getElementById("10km").value, "15km");
+          sessionStorage.setItem('distance', '15km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "15km") {
+          create_element(document.getElementById("15km").value, "20km");
+          sessionStorage.setItem('distance', '20km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "20km") {
+          create_element(document.getElementById("20km").value, "half");
+          sessionStorage.setItem('distance', 'half');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "half") {
+          create_element(document.getElementById("half").value, "25km");
+          sessionStorage.setItem('distance', '25km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "25km") {
+          create_element(document.getElementById("25km").value, "30km");
+          sessionStorage.setItem('distance', '30km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "30km") {
+          create_element(document.getElementById("30km").value, "35km");
+          sessionStorage.setItem('distance', '35km');
+          return
+        };
+        if (sessionStorage.getItem("distance") == "35km") {
+          create_element(document.getElementById("35km").value, "40km");
+          sessionStorage.setItem('distance', '40km');
+          return
+        };
+        
+      })
+
+      initial_set()
+      document.querySelectorAll(".splits").forEach((e) => {
+        e.addEventListener("change", gather_time, false);
+      })
+      let reset_button = document.querySelector("#reset");
+      reset_button.addEventListener("click", () => {
+        reset()
+      })
+    }
+  </script>
   <title>{% block title %}Marathon Finish Time Prediction{% endblock %}</title>
   <meta name="description" content="{% block description %}Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.{% endblock %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
@@ -32,12 +150,16 @@
       <div class="column">
         <form name="elapsed_time" method="get" action="/{% block lang2 %}en{% endblock %}/submit">
           <div class="field">
-            <p>{% block form1 %}Marks must start from 5km (and 10km, 15km ...) and each mark must be separated by a comma.{% endblock %}</p>
-            <p>{% block form2 %}The time format is H:MM:SS but you can omit hour(H) if it is zero.{% endblock %}</p>
-            <p>{% block form3 %}For example, if your times are 30 minutes at 5km and 65 minutes at 10km, the input is "<b>30:0, 1:05:0</b>".{% endblock %}</p>
-            {% block explanation %}<p><a href="{{ url_for('how_it_predicts') }}">How it predicts</a></p>{% endblock %}
-            <input class="input is-info" type="text" placeholder="30:0, 1:01:5 ..." name="record" required id="time_input" value="{{ input_value }}" pattern="^((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*,\s*))*((\d{1,2}:\d{1,2}:\d{1,2}|\d{1,2}:\d{1,2}|\d{1,2})(\s*))$">
+            {% block explanation %}
+            <p><a href="{{ url_for('how_it_predicts') }}">How it predicts</a></p>{% endblock %}
+            <input name="record" value="" type="hidden" id="record">
+            <p><a id="reset">reset split</a></p>
+            <div class="distances">
+              <label for="5km" class="distance">5km</label>
+              <input type="time" step="1" value="00:00:00" class="input is-info splits" id="5km">
+            </div>
           </div>
+          <p><a id="add_split">add split</a></p>
           <div class="control">
             {% block submit %}<input class="button is-link" type="submit" value="Predict">{% endblock %}
           </div>
