@@ -121,6 +121,7 @@
         if (sessionStorage.getItem("distance") == "35Km") {
           create_element(document.getElementById("35Km").value, "40Km");
           sessionStorage.setItem('distance', '40Km');
+          document.getElementById("add_split").remove();
           return
         };
         
@@ -162,7 +163,7 @@
             <p><a id="reset">{% block reset_split %}Reset Split{% endblock %}</a></p>
             <div class="distances">
               <label for="5Km" class="distance">5Km</label>
-              <input type="time" step="1" value="00:00:00" class="input is-info splits" id="5Km">
+              <input type="time" step="1" value="00:00:00" min="00:00:01" class="input is-info splits" id="5Km">
             </div>
           </div>
           <p><a id="add_split">{% block add_split %}Add Split{% endblock %}</a></p>
