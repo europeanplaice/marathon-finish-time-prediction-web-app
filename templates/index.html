@@ -28,9 +28,12 @@
     }
 
     let initial_set = () => {
-      let ar = ["5km", "10km", "15km", "20km", "half", "25km", "30km", "35km", "40km"];
+      let ar = ["5Km", "10Km", "15Km", "20Km", "Half", "25Km", "30Km", "35Km", "40Km"];
       for (let i in ar) {
         if (sessionStorage.getItem(ar[i]) != null) {
+          try{
+            document.getElementById("result_".concat(ar[i])).remove();
+          } catch {};
           if (document.getElementById(ar[i])){
             document.getElementById(ar[i]).value = sessionStorage.getItem(ar[i])
           } else {
@@ -77,47 +80,47 @@
     }
 
     window.onload = () => {
-      sessionStorage.setItem('distance', '5km');
+      sessionStorage.setItem('distance', '5Km');
       let elem = document.querySelector("#add_split");
       elem.addEventListener("click", () => {
-        if (sessionStorage.getItem("distance") == "5km") {
-          create_element(document.getElementById("5km").value, "10km");
-          sessionStorage.setItem('distance', '10km');
+        if (sessionStorage.getItem("distance") == "5Km") {
+          create_element(document.getElementById("5Km").value, "10Km");
+          sessionStorage.setItem('distance', '10Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "10km") {
-          create_element(document.getElementById("10km").value, "15km");
-          sessionStorage.setItem('distance', '15km');
+        if (sessionStorage.getItem("distance") == "10Km") {
+          create_element(document.getElementById("10Km").value, "15Km");
+          sessionStorage.setItem('distance', '15Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "15km") {
-          create_element(document.getElementById("15km").value, "20km");
-          sessionStorage.setItem('distance', '20km');
+        if (sessionStorage.getItem("distance") == "15Km") {
+          create_element(document.getElementById("15Km").value, "20Km");
+          sessionStorage.setItem('distance', '20Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "20km") {
-          create_element(document.getElementById("20km").value, "half");
-          sessionStorage.setItem('distance', 'half');
+        if (sessionStorage.getItem("distance") == "20Km") {
+          create_element(document.getElementById("20Km").value, "Half");
+          sessionStorage.setItem('distance', 'Half');
           return
         };
-        if (sessionStorage.getItem("distance") == "half") {
-          create_element(document.getElementById("half").value, "25km");
-          sessionStorage.setItem('distance', '25km');
+        if (sessionStorage.getItem("distance") == "Half") {
+          create_element(document.getElementById("Half").value, "25Km");
+          sessionStorage.setItem('distance', '25Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "25km") {
-          create_element(document.getElementById("25km").value, "30km");
-          sessionStorage.setItem('distance', '30km');
+        if (sessionStorage.getItem("distance") == "25Km") {
+          create_element(document.getElementById("25Km").value, "30Km");
+          sessionStorage.setItem('distance', '30Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "30km") {
-          create_element(document.getElementById("30km").value, "35km");
-          sessionStorage.setItem('distance', '35km');
+        if (sessionStorage.getItem("distance") == "30Km") {
+          create_element(document.getElementById("30Km").value, "35Km");
+          sessionStorage.setItem('distance', '35Km');
           return
         };
-        if (sessionStorage.getItem("distance") == "35km") {
-          create_element(document.getElementById("35km").value, "40km");
-          sessionStorage.setItem('distance', '40km');
+        if (sessionStorage.getItem("distance") == "35Km") {
+          create_element(document.getElementById("35Km").value, "40Km");
+          sessionStorage.setItem('distance', '40Km');
           return
         };
         
@@ -158,8 +161,8 @@
             <input name="q" value="" type="hidden" id="record">
             <p><a id="reset">{% block reset_split %}Reset Split{% endblock %}</a></p>
             <div class="distances">
-              <label for="5km" class="distance">5km</label>
-              <input type="time" step="1" value="00:00:00" class="input is-info splits" id="5km">
+              <label for="5Km" class="distance">5Km</label>
+              <input type="time" step="1" value="00:00:00" class="input is-info splits" id="5Km">
             </div>
           </div>
           <p><a id="add_split">{% block add_split %}Add Split{% endblock %}</a></p>

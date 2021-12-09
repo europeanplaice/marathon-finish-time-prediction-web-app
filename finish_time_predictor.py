@@ -141,11 +141,11 @@ class FinishTimePredictor():
                     "upper_50 => ******* upper_95 => *******"
                 estimation_dict[f"{kmidx}"] = {}
                 estimation_dict[f"{kmidx}"]["actual_data"] = actual_data
-                estimation_dict[f"{kmidx}"]["lower_95"] = "*******"
-                estimation_dict[f"{kmidx}"]["lower_50"] = "*******"
+                estimation_dict[f"{kmidx}"]["lower_95"] = "**************"
+                estimation_dict[f"{kmidx}"]["lower_50"] = "**************"
                 estimation_dict[f"{kmidx}"]["median"] = "*******"
-                estimation_dict[f"{kmidx}"]["upper_50"] = "*******"
-                estimation_dict[f"{kmidx}"]["upper_95"] = "*******"
+                estimation_dict[f"{kmidx}"]["upper_50"] = "**************"
+                estimation_dict[f"{kmidx}"]["upper_95"] = "**************"
 
             else:
                 if one_dim_decoder_data is not None:
@@ -164,6 +164,24 @@ class FinishTimePredictor():
                     self.upper_50[batch_idx, i - len(one_dim_encoder_data)])
                 upper_95 = seconds_to_string(
                     self.upper_95[batch_idx, i - len(one_dim_encoder_data)])
+                    
+                diff_lower_95 = \
+                    self.middle[batch_idx, i - len(one_dim_encoder_data)] - \
+                    self.lower_95[batch_idx, i - len(one_dim_encoder_data)]
+                diff_lower_50 = \
+                    self.middle[batch_idx, i - len(one_dim_encoder_data)] - \
+                    self.lower_50[batch_idx, i - len(one_dim_encoder_data)]
+                diff_upper_50 = \
+                    self.upper_50[batch_idx, i - len(one_dim_encoder_data)] - \
+                    self.middle[batch_idx, i - len(one_dim_encoder_data)]
+                diff_upper_95 = \
+                    self.upper_95[batch_idx, i - len(one_dim_encoder_data)] - \
+                    self.middle[batch_idx, i - len(one_dim_encoder_data)]
+
+                lower_95 = lower_95 + f"(-{seconds_to_string(diff_lower_95)})"
+                lower_50 = lower_50 + f"(-{seconds_to_string(diff_lower_50)})"
+                upper_50 = upper_50 + f"(+{seconds_to_string(diff_upper_50)})"
+                upper_95 = upper_95 + f"(+{seconds_to_string(diff_upper_95)})"
                 estimated_data = \
                     f"lower_95 => {lower_95} " \
                     f"lower_50 => {lower_50} " \
