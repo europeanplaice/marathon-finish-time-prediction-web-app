@@ -6,9 +6,6 @@
 {% block h1 %}マラソンフィニッシュタイム予測{% endblock %}
 {% block p1 %}スプリットタイムに基づいてゴールまでのタイムを予測します。{% endblock %}
 {% block p2 %}市民マラソンのエントリーに必要な予想タイムの計算などにお使いください。{% endblock %}
-{% block form1 %}スプリットタイムは5kmから順番に入力してください。それぞれのスプリットタイムはカンマで区切ってください。{% endblock %}
-{% block form2 %}入力形式は H:MM:SS としてください。ただし1時間未満の場合はHは省略可能です。{% endblock %}
-{% block form3 %}例えば、5kmで30分、10kmで65分であれば入力は "<b>30:0, 1:05:0</b>"となります。{% endblock %}
 {% block submit %}<input class="button is-link" type="submit" value="予測">{% endblock %}
 {% block reset_split %}スプリットをリセット{% endblock %}
 {% block add_split %}スプリットを追加{% endblock %}
@@ -18,6 +15,9 @@
 {% block upper_50 %}予測よりやや遅れた場合{% endblock %}
 {% block upper_95 %}予測より大幅に遅れた場合{% endblock %}
 {% block changelang %}
-<a href="/en">Switch to English</a>
+<a href="/en">English</a>
+{% endblock %}
+{% block changelang2 %}
+<a href="/zh">中文</a>
 {% endblock %}
 {% block explanation %}{% endblock %}

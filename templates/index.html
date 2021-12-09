@@ -4,6 +4,7 @@
   <link rel="canonical" href="https://sleepy-tundra-61541.herokuapp.com/"/>
   <link rel="alternate" hreflang="ja" href="https://sleepy-tundra-61541.herokuapp.com/ja"/>
   <link rel="alternate" hreflang="en" href="https://sleepy-tundra-61541.herokuapp.com/en"/>
+  <link rel="alternate" hreflang="zh" href="https://sleepy-tundra-61541.herokuapp.com/zh"/>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCKJQ30LZ"></script>
@@ -193,9 +194,14 @@
     <footer>
       <a href="https://github.com/europeanplaice/marathon-finish-time-prediction-web-app"><img src="/static/images/GitHub-Mark-64px.png" alt="link to github repository" width="32" height="32"></a>
       <hr>
-      {% block changelang %}
-      <a href="/ja">日本語に切り替える</a>
-      {% endblock %}
+      <div>
+        {% block changelang %}
+        <a href="/ja">日本語</a>
+        {% endblock %}
+        {% block changelang2 %}
+        <a href="/zh">中文</a>
+        {% endblock %}
+      </div>
     </footer>
   </div>
 </body>

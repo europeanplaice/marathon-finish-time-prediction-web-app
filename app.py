@@ -30,6 +30,11 @@ def index():
     return render_template("index.html", prediction=False)
 
 
+@app.route('/zh')
+def index_zh():
+    return render_template("index_zh.html", prediction=False)
+
+
 @app.route('/ja')
 def index_ja():
     return render_template("index_ja.html", prediction=False)
@@ -45,6 +50,8 @@ def process(text):
     if request.method == 'GET':
         if text == "ja":
             html_path = "index_ja.html"
+        elif text == "zh":
+            html_path = "index_zh.html"
         else:
             html_path = "index.html"
         results = main(

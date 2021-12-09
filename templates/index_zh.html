@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block lang %}zh{% endblock %}
+{% block lang2 %}zh{% endblock %}
+{% block title %}马拉松完成时间预测{% endblock %}
+{% block description %}使用机器学习从分段时间预测马拉松完成时间。 不仅计算和显示特定时间，而且还计算和显示预期误差。{% endblock %}
+{% block h1 %}马拉松完成时间预测{% endblock %}
+{% block p1 %}根据您的记录预测马拉松目标时间。{% endblock %}
+{% block p2 %}{% endblock %}
+{% block submit %}<input class="button is-link" type="submit" value="预测">{% endblock %}
+{% block reset_split %}重置{% endblock %}
+{% block add_split %}添加记录{% endblock %}
+{% block lower_95 %}如果明显早于预期{% endblock %}
+{% block lower_50 %}如果它比预期的早一点{% endblock %}
+{% block middle %}最标准预报时间{% endblock %}
+{% block upper_50 %}如果稍微落后于预测{% endblock %}
+{% block upper_95 %}如果明显落后于预期{% endblock %}
+{% block changelang %}
+<a href="/en">English</a>
+{% endblock %}
+{% block changelang2 %}
+<a href="/ja">日本語</a>
+{% endblock %}
+{% block explanation %}{% endblock %}
