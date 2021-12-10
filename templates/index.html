@@ -137,7 +137,7 @@
       })
     }
   </script>
-  <title>{% block title %}Marathon Finish Time Prediction{% endblock %}</title>
+  <title>{% block title %}AI based Marathon Finish Time Prediction{% endblock %}</title>
   <meta name="description" content="{% block description %}Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.{% endblock %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/static/css/style.css">
@@ -145,10 +145,10 @@
 
 <body>
   <div class="container">
-    <h1>{% block h1 %}Marathon Finish Time Prediction{% endblock %}</h1>
+    <h1>{% block h1 %}AI based Marathon Finish Time Prediction{% endblock %}</h1>
     <div class="columns">
       <div class="column">
-        <p>{% block p1 %}It predicts your marathon's record by your own splits.{% endblock %}</p>
+        <p>{% block p1 %}It predicts your marathon's record by your own splits. A prediction is provided by Machine Learning.{% endblock %}</p>
         <p>{% block p2 %}Please input your splits.{% endblock %}</p>
         {% block explanation %}
         <p><a href="{{ url_for('how_it_predicts') }}">How it predicts</a></p>{% endblock %}
