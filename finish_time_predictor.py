@@ -67,14 +67,14 @@ class Decoder(tf.keras.Model):
             else:
                 x += posencoded
                 x, state = self.cell(x, states=state)
-            pred = self.dense(self.dense_0(x))
-            mean = tf.cast(dataforenc[:, -1], tf.float32)
-            mean = mean + pred[:, 0] * kmfordec[i]
-            std = pred[:, 1]
-            pred = tf.stack([mean, std], 1)
-            predicts.append(pred)
+            predicts.append(x)
         predicts = tf.stack(predicts, 1)
-        dist = self.prob(predicts)
+        pred = self.dense(self.dense_0(predicts))
+        mean = tf.cast(dataforenc[:, -1], tf.float32)
+        mean = tf.expand_dims(mean, 1) + pred[:, :, 0] * kmfordec
+        std = pred[:, :, 1]
+        pred = tf.stack([mean, std], 2)
+        dist = self.prob(pred)
         return dist
 
 
