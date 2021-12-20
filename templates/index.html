@@ -6,15 +6,6 @@
   <link rel="alternate" hreflang="en" href="https://sleepy-tundra-61541.herokuapp.com/en"/>
   <link rel="alternate" hreflang="zh" href="https://sleepy-tundra-61541.herokuapp.com/zh"/>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCKJQ30LZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-LVCKJQ30LZ');
-  </script>
   <script>
     let gather_time = () => {
       let query = "";
@@ -26,7 +17,7 @@
       elem.value = query;
       return query
     }
-
+    
     let initial_set = () => {
       let ar = ["5Km", "10Km", "15Km", "20Km", "Half", "25Km", "30Km", "35Km", "40Km"];
       for (let i in ar) {
@@ -141,6 +132,25 @@
   <meta name="description" content="{% block description %}Marathon Finish Time Prediction predicts your marathon's record by splits using Machine Learning. It gives not only a prediction time but also a range of possible time.{% endblock %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/static/css/style.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVCKJQ30LZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LVCKJQ30LZ');
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-205487931-1">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-205487931-1');
+  </script>
 </head>
 
 <body>
