@@ -30,11 +30,6 @@ def to_english():
     return render_template("index.html", prediction=False)
 
 
-@app.route('/en')
-def index():
-    return render_template("index.html", prediction=False)
-
-
 @app.route('/zh')
 def index_zh():
     return render_template("index_zh.html", prediction=False)
@@ -50,8 +45,9 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 
+@app.route('/submit', methods=['POST', 'GET'])
 @app.route('/<string:text>/submit', methods=['POST', 'GET'])
-def process(text):
+def process(text=None):
     if request.method == 'GET':
         if text == "ja":
             html_path = "index_ja.html"
